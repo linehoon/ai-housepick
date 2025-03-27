@@ -18,7 +18,7 @@ export default function Home() {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        Authorization: 'Bearer sk-여기에_본인의_API_키_입력', // ← 여기에 본인의 OpenAI API 키 넣기
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}` // ← 여기에 본인의 OpenAI API 키 넣기
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
