@@ -1,1 +1,3 @@
-# ai-housepick
+# 🏡 AI HousePick
+
+단독주택에 필요한 용품을 AI가 추천해주는 간단한 웹사이트입니다.
