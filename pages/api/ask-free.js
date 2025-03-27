@@ -13,7 +13,9 @@ export default async function handler(req, res) {
   });
 
   const data = await response.json();
-  const reply = data[0]?.generated_text || 'AI가 답변을 생성하지 못했습니다.';
 
+  console.log("🤖 Hugging Face 응답:", data); // 이 줄 추가
+
+  const reply = data[0]?.generated_text || 'AI가 답변을 생성하지 못했습니다.';
   res.status(200).json({ reply });
 }
