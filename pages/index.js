@@ -10,14 +10,22 @@ export default function Home() {
     setLoading(true);
     setResult('<div class="loader">추천 중입니다...</div>');
 
-    const response = await fetch('/api/ask-free', {
+    const prompt = `당신은 단독주택 전문가입니다. 사용자 질문에 맞는 생활용품, 설치용품, 가전제품 등을 추천해주세요. 친절하게 한국어로 설명해 주세요.
+
+질문: ${query}
+답변:`;
+
+    const response = await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query })
+      headers: {
+        Authorization: 'Bearer hf_your_api_key_here', // 여기에 본인의 Hugging Face API 키 입력
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ inputs: prompt })
     });
 
     const data = await response.json();
-    const cleanText = data.reply.trim().replace(/^\n+/, '').replace(/\n{3,}/g, '\n\n');
+    const cleanText = data[0]?.generated_text?.trim().replace(/^\\n+/, '').replace(/\\n{3,}/g, '\\n\\n') || 'AI가 답변을 생성하지 못했습니다.';
     setResult(cleanText);
     setLoading(false);
   };
