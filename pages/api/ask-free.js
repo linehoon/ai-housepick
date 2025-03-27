@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   const { query } = req.body;
 
-  const response = await fetch('https://api-inference.huggingface.co/models/beomi/KoAlpaca-Polyglot-5.8B', {
+  const response = await fetch('https://api-inference.huggingface.co/models/nlpai-lab/kullm-polyglot-5.8b', {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
